@@ -3,10 +3,18 @@ import React, { useState } from 'react';
 import Item from './Item/Item';
 
 function Items(props) {
+    const mystyle = {
+        padding: "10px",
+        fontFamily: "Arial",
+        marginBottom: "100px"
+      };
     return (
-        props.allTasks.map((item, index) => 
-            <Item key = {index} taskChecked={props.taskChecked} task ={item}/>
-        )
+        <div style={mystyle}>
+            {
+                props.allTasks.map((item, index) => 
+                    <Item style={mystyle} key = {index} taskChecked={props.taskChecked} task ={item}/>)
+            }
+        </div>
    );
 }
 export default Items;
