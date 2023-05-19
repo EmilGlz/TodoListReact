@@ -19,7 +19,7 @@ function App() {
 
   function addTask(task)
   {
-    if(task != ""){ 
+    if(task.description != ""){ 
       task.id = tasks.length;
       setTasks(current => {
         console.log(current);  
