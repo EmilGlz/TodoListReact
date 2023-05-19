@@ -1,23 +1,42 @@
 import logo from './logo.svg';
 import './App.css';
+import Items from './Components/Items/Items';
+import AddInput from './Components/AddInput/AddInput';
+import React, { useState } from 'react';
+
 
 function App() {
+
+  const startValues = [
+    {
+      id: 0,
+      description: "Work",
+      isChecked: true
+    }
+  ]
+
+  const [tasks, setTasks] = new useState(startValues);
+
+  function addTask(task)
+  {
+    if(task != ""){ 
+      task.id = tasks.length;
+      setTasks(current => {
+        console.log(current);  
+        return [...current, task];
+      });
+    }
+  }
+
+  function taskIsChecked(index, isChecked)
+  {
+    console.log("App.taskIsChecked "+index+"  " + isChecked);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AddInput taskAdded = {addTask} />
+      <Items allTasks = {tasks} taskChecked={taskIsChecked}/>
     </div>
   );
 }
