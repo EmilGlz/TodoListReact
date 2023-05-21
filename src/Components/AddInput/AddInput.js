@@ -3,7 +3,7 @@ import './AddInput.css';
 import React, { useState } from 'react';
 
 function AddInput(props) {
-    const [newTask, setNewTask] =  new useState({id: 0, isChecked : false, description : ""});
+    const [newTask, setNewTask] =  new useState({isChecked : false, description : ""});
 
     function addTaskClicked(){
         props.taskAdded(newTask);
@@ -12,7 +12,6 @@ function AddInput(props) {
     function handleChange(event)
     {
         setNewTask({
-            id: 0,
             isChecked: false,
             description: event.target.value
         })

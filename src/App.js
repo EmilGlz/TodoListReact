@@ -20,17 +20,20 @@ function App() {
   function addTask(task)
   {
     if(task.description != ""){ 
-      setTasks(oldArray => [...oldArray, {
-        id: oldArray.length,
-        description: task.description,
-        isChecked: task.isChecked
-      }] );
+      setTasks(oldArray => [...oldArray, {...task, id: oldArray.length}] );
     }
   }
 
   function taskIsChecked(index, isChecked)
   {
-    // update array
+      // setTasks((lastArray)=>{
+      //   lastArray[index].isChecked = isChecked;
+      //   return lastArray;
+      // })
+  }
+
+  function removeTask(index){
+    // setTasks((prevArray)=>[])
   }
 
   return (
