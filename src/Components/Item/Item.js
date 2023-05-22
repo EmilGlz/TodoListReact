@@ -33,8 +33,6 @@ function Item(props) {
   }
 
   return (
-        // props.task && props.task.isChecked && props.task.description &&
-        props &&
         <div className="card-body add-input-container ">
             <p className="card-text">{props.task.id + ' ' + props.task.description}</p>
           <button className='button'>

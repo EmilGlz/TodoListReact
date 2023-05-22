@@ -6,15 +6,22 @@ import Item from './Components/Item/Item';
 
 const startValues = [
   {
-    isChecked: false,
+    isChecked: true,
     description: "Work",
     id: 0
   }
 ]
 
+const allFilters = {
+  showAll: 0,
+  showDone: 1,
+  showNotDone: 2,
+}
+
+
 function App() {
   const [tasks, setTasks] = new useState(startValues);
-
+  const [filter, setFilter] = new useState(allFilters.showAll);
   function removeTask(index){
     setTasks(prevTasks => prevTasks.filter(task => task.id !== index));
   }
@@ -59,16 +66,55 @@ function App() {
   function removeCheckedTasks()
   {
     setTasks(prevTasks => prevTasks.filter(task => !task.isChecked));
-    
+  }
+
+  function filterAllTasks()
+  {
+    setFilter(allFilters.showAll)
+  }
+  
+  function filterDoneTasks()
+  {
+    setFilter(allFilters.showDone)
+  }
+  
+  function filterNotDoneTasks()
+  {
+    setFilter(allFilters.showNotDone)
+  }
+
+  let jsxToRender;
+  switch(filter)
+  {
+    case allFilters.showAll:
+      jsxToRender = tasks.map((item, index) => <Item key = {index} taskRemoved = {removeTask} taskDescriptionUpdated = {updateTaskDescription} taskChecked={taskIsChecked} task ={item}/>)
+      break;
+    case allFilters.showDone:
+      jsxToRender = tasks.map((item, index) => item.isChecked && <Item key = {index} taskRemoved = {removeTask} taskDescriptionUpdated = {updateTaskDescription} taskChecked={taskIsChecked} task ={item}/>)
+      break;
+    case allFilters.showNotDone:
+      jsxToRender = tasks.map((item, index) => !item.isChecked && <Item key = {index} taskRemoved = {removeTask} taskDescriptionUpdated = {updateTaskDescription} taskChecked={taskIsChecked} task ={item}/>)
+      break;
   }
 
   return (
     <div className="App">
       <AddInput taskAdded = {addTask} />
+      <div>
+      <button onClick={filterAllTasks} className='button'>
+        All
+      </button>
+      <button onClick={filterDoneTasks} className='button'>
+        Done
+      </button>
+      <button onClick={filterNotDoneTasks} className='button'>
+        Todo
+      </button>
+      </div>
+
       <div className='all-items'>
       {
-        tasks.map((item, index) => 
-        <Item key = {index} taskRemoved = {removeTask} taskDescriptionUpdated = {updateTaskDescription} taskChecked={taskIsChecked} task ={item}/>)
+        jsxToRender
       }
       </div>
 
