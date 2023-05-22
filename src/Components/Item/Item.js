@@ -6,8 +6,6 @@ function Item(props) {
   const [showEditPanel, setshowEditPanel] = useState(false)
   const [newDescription, setnewDescription] = useState('')
 
-  console.log(props)
-
   function checkboxClicked()
   {
     props.taskChecked(props.task.id, !props.task.isChecked);
